@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+</head>
+<body>
+    <h1> Esto es un test </h1>
+    <button id="btnLeave" type="button">Salir</button>    
+    <script>
+        // Evento que escucha cualquier clic en el documento
+        document.addEventListener('click', function(event) {
+            // Envía un mensaje al padre del iframe notificando que se ha hecho clic en cualquier parte del documento
+			console.log('Click Enviado desde el servidor');
+            window.parent.postMessage({
+                type: 'iframeClick'
+            }, '*');
+        });
+        
+        // Seleccionar el botón "Salir" usando getElementById
+        const btnLeave = document.getElementById('btnLeave');
+        
+        // Agregar el evento al botón "Salir"
+        btnLeave.addEventListener('click', function(event) {
+            // Envía un mensaje al padre del iframe notificando que se ha hecho clic en el botón "Salir"
+            window.parent.postMessage({
+                type: 'iframeLeave'
+            }, '*');
+        });
+    </script>
+</body>
+</html>
